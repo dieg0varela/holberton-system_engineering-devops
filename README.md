@@ -1,1 +1,1 @@
-**Shell exercises**
+**Shell exercise**
