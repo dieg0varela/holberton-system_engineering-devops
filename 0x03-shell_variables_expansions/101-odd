@@ -1,0 +1,2 @@
+#!/bin/bash
+perl -ne 'print unless (0 != $. % 2)'
