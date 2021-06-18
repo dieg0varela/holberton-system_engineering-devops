@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script print Holberton School 9 times and 1 Hi
+i="0"
+
+while [ $i -lt 10 ]
+do
+	if [ $i -eq "9" ]
+	then
+		echo "Hi"
+	else
+		 echo "Holberton School"
+	fi
+done
