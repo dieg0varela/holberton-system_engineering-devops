@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script print how many times an ip appears in the log
+
+cat < apache-access.log | awk '{print $1" "$9}' | sort | uniq -c | sort -r
