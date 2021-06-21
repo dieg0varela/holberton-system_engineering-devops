@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Kill task 4
+pid=$(pgrep -fn 4-to_infinity_and_beyond)
+kill -9 $pid
