@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script that open a nc session listen port 98
+nc -l -p 98
