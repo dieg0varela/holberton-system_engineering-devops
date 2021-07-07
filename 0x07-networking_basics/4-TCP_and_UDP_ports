@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# Script that shows input and output connections
 netstat -lp
