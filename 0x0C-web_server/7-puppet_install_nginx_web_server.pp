@@ -1,5 +1,4 @@
 # Create a holberton file in /tmp with specific permissions
-include stdlib
 
 package { 'nginx':
     ensure          => 'present',
