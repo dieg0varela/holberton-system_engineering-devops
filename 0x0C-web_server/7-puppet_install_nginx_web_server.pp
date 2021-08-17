@@ -1,24 +1,25 @@
 # Create a holberton file in /tmp with specific permissions
 
 package { 'nginx':
-    ensure          => 'present',
-    provider        => 'apt',
-    install_options => ['-y'],
+    ensure => present,
 }
 
 file { '/var/www/html/index.html':
-    ensure  => 'present',
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0744',
+    ensure  => present,
     content => 'Holberton School',
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure => 'present',
-}->
-file_line {'Adding redirect':
-    path  => '/etc/nginx/sites-available/default',
-    after => 'server_name _;',
-    line  =>  '        rewrite ^/redirect_me/ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+file_line {'Adding_redirect':
+    ensure => present,
+    path   => '/etc/nginx/sites-available/default',
+    after  => 'server_name _;',
+    line   =>  '        rewrite ^/redirect_me/ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+}
+
+service { 'nginx':
+  ensure     => running,
+  enable     => true,
+  hasrestart => true,
+  require    => Package['nginx'],
+  subscribe  => File_line['Adding_redirect'],
 }
