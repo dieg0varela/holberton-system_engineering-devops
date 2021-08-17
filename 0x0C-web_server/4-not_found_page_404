@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#Script that add custon 404 page
+
+sed -i "/location/a \                error_page 404 /code_404.html;\n" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/code_404.html
+service nginx restart
