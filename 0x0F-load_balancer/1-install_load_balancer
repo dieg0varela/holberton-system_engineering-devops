@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Script that install and configure haproxy
+apt update -y
+apt install -y haproxy
+printf %s "# Holberton Server configurations
+127.0.0.1 haproxy.local
+34.139.35.88 web1.local
+35.229.44.12 web2.local" >> /etc/hosts
+echo "ENABLED=1" >> /etc/default/haproxy
+printf %s "frontend Local_Server
+        bind 0.0.0.0:80
+        mode http
+        default_backend My_Web_Servers
+
+" >> /etc/haproxy/haproxy.cfg
+printf %s "backend My_Web_Servers
+        mode http
+        balance roundrobin
+        option forwardfor
+        http-request set-header X-Forwarded-Port %[dst_port]
+        http-request add-header X-Forwarded-Proto https if { ssl_fc }
+        option httpchk HEAD / HTTP/1.1rnHost:localhost
+        server web1.local  34.139.35.88:80
+        server web2.local  35.229.44.12:80
+
+" >> /etc/haproxy/haproxy.cfg
+haproxy -c -f /etc/haproxy/haproxy.cfg
+service haproxy restart

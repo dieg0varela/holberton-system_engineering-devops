@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#Script that add custon 404 page
+apt update -y
+apt install -y nginx
+echo "Holberton School" > /var/www/html/index.html
+service nginx restart
+sed -i "/server_name _/a \        rewrite ^/redirect_me/ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n" /etc/nginx/sites-available/default
+service nginx restart
+sed -i "/location \//a \                error_page 404 /code_404.html;\n" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/code_404.html
+service nginx restart
+sed -i "/location \//a \                add_header X-Server-By $HOSTNAME;\n" /etc/nginx/sites-available/default
+service nginx restart
