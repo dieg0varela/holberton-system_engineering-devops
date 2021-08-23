@@ -24,15 +24,15 @@ file_line {'Adding_redirect':
 file_line {'Adding_404':
     ensure => present,
     path   => '/etc/nginx/sites-available/default',
-    after  => 'server_name _;',
+    after  => 'location / {',
     line   =>  '        error_page 404 /404.html;\n;',
 }
 
 file_line {'Adding_Header':
     ensure => present,
     path   => '/etc/nginx/sites-available/default',
-    after  => 'server_name _;',
-    line   =>  '               add_header X-Served-By $HOSTNAME;\n;',
+    after  => 'location / {',
+    line   =>  '               add_header X-Served-By ${HOSTNAME};\n;',
 }
 
 service { 'nginx':
