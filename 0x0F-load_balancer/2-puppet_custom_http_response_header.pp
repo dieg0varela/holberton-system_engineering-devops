@@ -8,7 +8,7 @@ file_line {'Adding_Header':
     ensure => present,
     path   => '/etc/nginx/sites-available/default',
     after  => 'location / {',
-    line   =>  '               add_header X-Served-By ${HOSTNAME};\n;',
+    line   =>  '               add_header X-Served-By ${HOSTNAME};',
 }
 
 service { 'nginx':
