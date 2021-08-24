@@ -1,20 +1,23 @@
 # Create a holberton file in /tmp with specific permissions
 
+exec { 'apt-update':
+  command => '/usr/bin/apt update',
+}
+
 package { 'nginx':
-    ensure => present,
+    ensure  => present,
+    require => Exec['apt-update'],
 }
 
 file_line {'Adding_Header':
-    ensure => present,
-    path   => '/etc/nginx/sites-available/default',
-    after  => 'location / {',
-    line   =>  '               add_header X-Served-By ${HOSTNAME};',
+    ensure  => 'present',
+    path    => '/etc/nginx/sites-available/default',
+    after   => 'listen 80 default_server;',
+    line    => 'add_header X-Served-By $hostname;',
+    require => Package['nginx'],
 }
 
 service { 'nginx':
-  ensure     => running,
-  enable     => true,
-  hasrestart => true,
-  require    => Package['nginx'],
-  subscribe  => File_line['Adding_Header'],
+    ensure  => running,
+    require => Package['nginx'],
 }
