@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # Repair nginx port in sites-enabled
-pkill -9 nginx
 ln -sfn /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart                          
+pkill -1 nginx
