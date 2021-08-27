@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Script that print domain and subdomain info
+
+func () {	
+	ip=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tr '\t\n' ' ' | cut -d ' ' -f 8)
+	reg=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tr '\t\n' ' ' | cut -d ' ' -f 7)
+	sub=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tr '\t\n' ' ' | cut -d ' ' -f 4 | cut -d '.' -f 1)
+	text="The subdomain ${sub} is a ${reg} record and points to ${ip}"
+	awk -v var="$text" 'BEGIN {print var}'
+}
+
+if [ $# -eq 2 ]
+then
+	page="$2.$1"
+	func $page
+else
+	func "www.$1"
+	func "lb-01.$1"
+	func "web-01.$1"
+	func "web-02.$1"
+fi
