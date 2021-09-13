@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 ''' API Module task 0'''
+import json
 import requests
 from sys import argv
-import json
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
     response = requests.get(url + "todos?userId=" + argv[1])
