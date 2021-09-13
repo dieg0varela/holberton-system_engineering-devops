@@ -23,4 +23,6 @@ if __name__ == "__main__":
         dicti['completed'] = data.get('completed')
         dicti['username'] = uname
         resu[str(userId)].append(dicti)
-    print(resu)
+    with open(filename, "w") as f:
+        f.write(json.dumps(resu))
+    f.closed
