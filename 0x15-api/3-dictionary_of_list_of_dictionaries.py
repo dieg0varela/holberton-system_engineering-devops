@@ -10,16 +10,18 @@ if __name__ == "__main__":
     filename = "todo_all_employees.json"
     resu = {}
     for data in jsonRes:
+        lista = []
         userid = data.get('id')
         uname = data.get('username')
-        resu[str(userid)] = []
         tasks = requests.get(url + "todos?userid=/" + str(userid)).json()
         for task in tasks:
             dicti = {}
             dicti['task'] = task.get('title')
             dicti['completed'] = task.get('completed')
             dicti['username'] = uname
-            resu[str(userid)].append(dicti)
+            lista.append(dicti)
+        resu[str(userid)] = lista
+    print(resu)
     with open(filename, "w") as f:
         f.write(json.dumps(resu))
     f.closed
