@@ -21,7 +21,6 @@ if __name__ == "__main__":
             dicti['username'] = uname
             lista.append(dicti)
         resu[str(userid)] = lista
-    print(resu)
     with open(filename, "w") as f:
         f.write(json.dumps(resu))
     f.closed
