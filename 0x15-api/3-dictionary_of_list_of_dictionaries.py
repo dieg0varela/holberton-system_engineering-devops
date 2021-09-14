@@ -20,7 +20,7 @@ if __name__ == "__main__":
             dicti['completed'] = task.get('completed')
             dicti['username'] = uname
             lista.append(dicti)
-        resu[str(userid)] = lista
+        resu[userid] = lista
     with open(filename, "w") as f:
         f.write(json.dumps(resu))
     f.closed
