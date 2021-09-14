@@ -13,7 +13,7 @@ if __name__ == "__main__":
         lista = []
         userid = data.get('id')
         uname = data.get('username')
-        tasks = requests.get(url + "todos?userid=/" + str(userid)).json()
+        tasks = requests.get(url + "todos?userId=" + str(userid)).json()
         for task in tasks:
             dicti = {}
             dicti['task'] = task.get('title')
