@@ -8,7 +8,7 @@ def top_ten(subreddit):
     url = "https://reddit.com/r/"
     headers = {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)\
                               Gecko/20100101 Firefox/15.0.1"}
-    response = requests.get(url + subreddit + "/hot.json",
+    response = requests.get(url + subreddit + "/hot.json?limit=10",
                             headers=headers)
     try:
         ret = response.json()['data']
